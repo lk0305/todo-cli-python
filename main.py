@@ -11,6 +11,7 @@ def display_menu() -> None:
 
 def main() -> None:
     """Run the interactive menu."""
+    todos = []
     print("欢迎使用待办事项工具！")
 
     while True:
@@ -26,9 +27,16 @@ def main() -> None:
             return
 
         if choice == "1":
-            print("查看待办功能暂未实现。")
+            if not todos:
+                print("暂无待办事项。")
+            else:
+                print("待办事项：")
+                for i, todo in enumerate(todos, start=1):
+                    print(f"{i}. {todo}")
         elif choice == "2":
-            print("添加待办功能暂未实现。")
+            todo = input("请输入待办事项:").strip()
+            todos.append(todo)
+            print("添加成功")
         else:
             print("无效选项，请重新输入。")
 
