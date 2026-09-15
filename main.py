@@ -30,9 +30,8 @@ def main() -> None:
             if not todos:
                 print("暂无待办事项。")
             else:
-                print("待办事项：")
-                for i, todo in enumerate(todos, start=1):
-                    print(f"{i}. {todo}")
+                for index,todo in enumerate(todos,start=1):
+                    print("{}.{}".format(index,todo))
         elif choice == "2":
             todo = input("请输入待办事项:").strip()
             todos.append(todo)
