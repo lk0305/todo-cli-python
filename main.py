@@ -1,5 +1,7 @@
 """A simple command-line entry point for the todo application."""
 
+import json
+
 
 def display_menu() -> None:
     """Print the available todo actions."""
@@ -11,7 +13,12 @@ def display_menu() -> None:
 
 def main() -> None:
     """Run the interactive menu."""
-    todos = []
+    try:
+        with open("todos.json", "r", encoding="utf-8") as file:
+            todos = json.load(file)
+    except IOError:
+        todos = []
+
     print("欢迎使用待办事项工具！")
 
     while True:
@@ -35,6 +42,8 @@ def main() -> None:
         elif choice == "2":
             todo = input("请输入待办事项:").strip()
             todos.append(todo)
+            with open("todos.json", "w", encoding="utf-8") as file:
+                json.dump(todos, file, ensure_ascii=False, indent=2)
             print("添加成功")
         else:
             print("无效选项，请重新输入。")
